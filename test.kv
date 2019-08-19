@@ -1,0 +1,169 @@
+#:kivy 1.9.1
+<TimerProt>:
+	id: rootw
+	BoxLayout:
+		orientation: 'vertical'
+		size_hint: (1,1)
+		BoxLayout:
+			orientation: 'vertical'
+			id: boxtimer
+			size_hint_y: .45
+			Label:
+				id: heading
+				size_hint_y: .35
+				text: 'Stop and Wait ARQ Demo'
+				canvas.before:
+					Color:
+						rgb: 1,0,0
+					Rectangle:
+						pos: self.pos
+						size: self.size
+				font_size: 25
+			Label:
+				id: timerside
+				text: 'Sender Timer'
+				font_size: 20
+				canvas.before:
+					Color:
+						rgb: 0,0,1
+					Rectangle:
+						pos: self.pos
+						size: self.size
+			Label:
+				id: timerlabel
+				text: str(rootw.time)
+				font_size: 25
+			Button:
+				id: timerreset
+				text: 'Reset'
+				font_size: 20
+				on_press: rootw.sreset()
+				disabled: True
+		BoxLayout:
+			id: boxfield
+			BoxLayout:
+				id: leftbox
+				BoxLayout:
+					orientation: 'vertical'
+					id: sendfield
+					Label:
+						id: shead
+						font_size: 20
+						text: 'Sender Side'
+						size_hint_y: .1
+						canvas.before:
+							Color:
+								rgb: 0,0,1
+							Rectangle:
+								pos: self.pos
+								size: self.size
+					Label:
+						id: sframelabel
+						font_size: 40
+						text: rootw.prts()
+					Button:
+						id: sendbutton
+						font_size: 30
+						text: 'Send Frame'
+						size_hint_y: .2
+						on_press: rootw.start()
+				BoxLayout:
+					id: medfield
+					Label:
+						id: medlabel
+						text: 'Transmission Media'
+						font_size: 20
+				BoxLayout:
+					orientation: 'vertical'
+					id: recfield
+					Label:
+						id: rhead
+						font_size: 20
+						text: 'Receiver Side'
+						size_hint_y: .1
+						canvas.before:
+							Color:
+								rgb: 0,0,1
+							Rectangle:
+								pos: self.pos
+								size: self.size
+					Label:
+						id: rframelabel
+						font_size: 40
+						text: rootw.prtr()
+					Button:
+						id: recbutton
+						font_size: 30
+						text: 'Send ACK'
+						size_hint_y: .2
+						disabled: True
+						on_press: rootw.reset()
+			BoxLayout:
+				id: rightbox
+				orientation: 'vertical'
+				BoxLayout:
+					id:slogheadbox
+					size_hint_y: .2
+					Label:
+						id: slogheadlabel
+						text: 'Sender Log'
+						font_size: 20
+						canvas.before:
+							Color:
+								rgb: 0.25,0.75,0
+							Rectangle:
+								pos: self.pos
+								size: self.size
+				BoxLayout:
+					id: slogbox
+					Label:
+						id: sloglabel
+						text: 'Sender Log runs here'
+						halign: 'left'
+						font_size: 15
+				BoxLayout:
+					id:rlogheadbox
+					size_hint_y: .2
+					Label:
+						id: rlogheadlabel
+						text: 'Receiver Log'
+						font_size: 20
+						canvas.before:
+							Color:
+								rgb: 0.25,0.75,0
+							Rectangle:
+								pos: self.pos
+								size: self.size
+				BoxLayout:
+					id: rlogbox
+					Label:
+						id: rloglabel
+						text: 'Receiver Log runs here'
+						halign: 'left'
+						font_size: 15
+				BoxLayout:
+					id:clogheadbox
+					size_hint_y: .2
+					Label:
+						id: clogheadlabel
+						text: 'Connection Log and Switch'
+						font_size: 20
+						canvas.before:
+							Color:
+								rgb: 0.25,0.75,0
+							Rectangle:
+								pos: self.pos
+								size: self.size
+				BoxLayout:
+					id: clogbox
+					Label:
+						id: cloglabel
+						halign: 'left'
+						text: 'The connection is OFF'
+						font_size: 15
+				BoxLayout:
+					id: switchbox
+					size_hint_y: .2
+					Switch:
+						id: switchlabel
+						on_touch_move: rootw.update()
